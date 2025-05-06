@@ -22,14 +22,19 @@ const config = {
     adapter: adapter()
   },
   
-  // Only apply mdsvex to .md files, not to .svelte files
-  extensions: ['.svelte'],
+  // This is crucial - need to include both file types
+  extensions: ['.svelte', '.md', '.svx'],
   
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      extensions: ['.md', '.svx'] // Ensure this only targets Markdown files
+      extensions: ['.md', '.svx'],
+      // Add this to help with syntax highlighting in code blocks
+      highlight: {
+        alias: { js: 'javascript' }
+      }
     })
   ]
 };
+
 export default config;
