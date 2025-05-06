@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui"; {
+  themes: light;
+}
+:root {
+  font-family: 'Montserrat Variable', sans-serif;
+}
+
+html, body {
+  font-family: 'Montserrat Variable', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+}

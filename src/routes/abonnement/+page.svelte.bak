@@ -1,0 +1,429 @@
+<script>
+  import herobg from "$lib/img/hero-bg.png";
+  import herooverlay from "$lib/img/hero-overlay.png";
+  import herobottomround from "$lib/img/hero-bottom-round.png";
+  
+  // Images for subscription cards
+  import plumbing from "$lib/img/plumbing.png";
+  import electrical from "$lib/img/electrical.avif";
+  import locksmith from "$lib/img/locksmith.png";
+  
+  // For FAQ section
+  let openFaq = null;
+  
+  const toggleFaq = (index) => {
+    openFaq = openFaq === index ? null : index;
+  };
+  
+  // FAQ questions and answers
+  const faqs = [
+    {
+      question: "Hoe snel kunnen jullie ter plaatse zijn na mijn oproep?",
+      answer: "Wij streven ernaar om binnen 30-60 minuten na uw oproep ter plaatse te zijn, afhankelijk van uw locatie en de verkeerssituatie. Als abonnee krijgt u voorrang bij spoedgevallen."
+    },
+    {
+      question: "Zijn er extra kosten bij een spoedoproep buiten kantooruren?",
+      answer: "Voor abonnees zijn er geen extra kosten voor oproepen buiten kantooruren. Alle tarieven blijven hetzelfde, ongeacht het tijdstip waarop u ons belt."
+    },
+    {
+      question: "Wat gebeurt er als ik al mijn inbegrepen bezoeken heb gebruikt?",
+      answer: "Als u al uw inbegrepen bezoeken heeft gebruikt, kunt u nog steeds gebruik maken van onze diensten tegen een speciaal gereduceerd tarief voor abonnees."
+    },
+    {
+      question: "Kan ik mijn abonnement opzeggen of wijzigen?",
+      answer: "Ja, u kunt uw abonnement op elk moment wijzigen of opzeggen met een opzegtermijn van één maand. Bij een jaarabonnement ontvangt u een restitutie voor de niet-gebruikte maanden minus een administratieve vergoeding."
+    },
+    {
+      question: "Zijn materiaalkosten inbegrepen in mijn abonnement?",
+      answer: "De voorrijkosten en arbeidskosten voor de inbegrepen bezoeken zijn gedekt door uw abonnement. Materiaalkosten zoals nieuwe onderdelen of vervangingen worden apart in rekening gebracht, maar abonnees ontvangen wel 10% korting op alle materialen."
+    },
+    {
+      question: "Geldt mijn abonnement voor al mijn eigendommen?",
+      answer: "Uw abonnement is gekoppeld aan één woonadres. Als u meerdere panden heeft, kunt u een aanvullend abonnement afsluiten voor elk extra pand met 15% korting op het tweede en volgende abonnement."
+    }
+  ];
+</script>
+
+<svelte:head>
+  <!-- Primary Meta Tags -->
+  <title>Abonnementen - SpoedSpecialist | Altijd Verzekerd van Hulp</title>
+  <meta
+    name="title"
+    content="Abonnementen - SpoedSpecialist | Altijd Verzekerd van Hulp"
+  />
+  <meta
+    name="description"
+    content="Word abonnee bij SpoedSpecialist en wees altijd verzekerd van snelle hulp bij calamiteiten. Kies uit verschillende abonnementen voor loodgieter, elektricien en slotenmaker diensten."
+  />
+  <meta
+    name="keywords"
+    content="spoed abonnement, servicecontract loodgieter, onderhoudscontract elektricien, slotenmaker abonnement, spoedhulp verzekering, calamiteiten abonnement"
+  />
+</svelte:head>
+
+<!-- Hero Section -->
+<div class="px-4 pb-8 md:px-8">
+  <div class="h-[80vh] md:h-[60vh] w-full rounded-3xl relative overflow-hidden">
+    <!-- Base background image with darker blue overlay -->
+    <div class="absolute inset-0 w-full h-full">
+      <img
+        src={herobg}
+        alt="Background"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Dark blue overlay to achieve #218BEC color -->
+      <div class="absolute inset-0 bg-[#218BEC] opacity-70 mix-blend-multiply"></div>
+    </div>
+    <!-- Overlay image with darker blue filter -->
+    <div class="absolute inset-0 w-full h-full">
+      <img
+        src={herooverlay}
+        alt="Overlay"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Additional dark blue tint for overlay -->
+      <div class="absolute inset-0 bg-[#218BEC] opacity-40 mix-blend-overlay"></div>
+    </div>
+    <!-- Bottom round element -->
+    <div class="absolute -bottom-5 w-full">
+      <img src={herobottomround} alt="Bottom Round" class="w-full" />
+    </div>
+    <!-- Text Content Container -->
+    <div class="absolute inset-0 flex flex-col justify-center">
+      <div class="mx-6 md:ml-16 max-w-2xl z-10">
+        <!-- Heading -->
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">
+          Word Abonnee en Wees Altijd Verzekerd van Hulp
+        </h1>
+        <!-- Undertext / Description -->
+        <p class="text-lg md:text-xl text-gray-100 mb-6 md:mb-8">
+          Met onze abonnementen staat er altijd een vakman voor u klaar. Geen zorgen meer over plotselinge lekkages, stroomstoringen of slotproblemen.
+        </p>
+        <!-- Button -->
+        <a
+          href="#abonnementen"
+          class="bg-yellow-300 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 md:py-4 md:px-8 transition duration-300 mb-4 rounded-xl inline-flex items-center gap-2"
+        >
+          Bekijk Abonnementen
+        </a>
+        <!-- Small text under button -->
+        <p class="text-sm text-gray-200 max-w-md">
+          Flexibele opties met maandelijkse of jaarlijkse betaling.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Benefits Section -->
+<div class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Waarom een Abonnement?</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        Een abonnement bij SpoedSpecialist biedt u gemoedsrust en zekerheid, zodat u altijd op onze hulp kunt rekenen wanneer het nodig is.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Benefit 1 -->
+      <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Voorrang bij Noodgevallen</h3>
+        <p class="text-gray-600 font-light">Als abonnee krijgt u altijd voorrang bij noodgevallen. Onze professionals staan 24/7 voor u klaar.</p>
+      </div>
+      
+      <!-- Benefit 2 -->
+      <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Vaste Lage Kosten</h3>
+        <p class="text-gray-600 font-light">Geen onverwachte hoge rekeningen meer. Met een abonnement weet u precies waar u aan toe bent met voorspelbare kosten.</p>
+      </div>
+      
+      <!-- Benefit 3 -->
+      <div class="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Korting op Materialen</h3>
+        <p class="text-gray-600 font-light">Abonnees ontvangen 10% korting op alle materialen en onderdelen die nodig zijn voor reparaties.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Subscription Plans Section -->
+<div id="abonnementen" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Onze Abonnementen</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        Kies het abonnement dat het beste bij uw behoeften past. Alle abonnementen zijn beschikbaar met maandelijkse of jaarlijkse betaling.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Basic Plan -->
+      <div class="border border-gray-200 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg group">
+        <div class="bg-blue-50 p-6 text-center border-b border-gray-200">
+          <h3 class="text-2xl font-bold">Basis</h3>
+          <div class="mt-4 flex justify-center">
+            <span class="text-4xl font-bold">€9,95</span>
+            <span class="text-gray-500 self-end mb-1 ml-1">/maand</span>
+          </div>
+          <p class="mt-2 text-gray-600 text-sm">of €99 per jaar (17% korting)</p>
+        </div>
+        <div class="p-6 flex-grow">
+          <img src={plumbing} alt="Loodgieter" class="w-full h-48 object-cover rounded-xl mb-6" />
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>2 spoedbezoeken per jaar</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Voorrang bij noodgevallen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>5% korting op materialen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>24/7 telefonische ondersteuning</span>
+            </li>
+          </ul>
+        </div>
+        <div class="p-6 border-t border-gray-200">
+          <a href="/contact" class="w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl transition duration-300">
+            Kies Basis
+          </a>
+        </div>
+      </div>
+      
+      <!-- Premium Plan (Highlighted) -->
+      <div class="border-2 border-blue-500 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg relative group">
+        <div class="absolute top-0 right-0 bg-blue-500 text-white px-4 py-1 rounded-bl-lg font-medium">
+          Populair
+        </div>
+        <div class="bg-blue-500 p-6 text-center border-b border-blue-400">
+          <h3 class="text-2xl font-bold text-white">Premium</h3>
+          <div class="mt-4 flex justify-center text-white">
+            <span class="text-4xl font-bold">€19,95</span>
+            <span class="self-end mb-1 ml-1">/maand</span>
+          </div>
+          <p class="mt-2 text-blue-100 text-sm">of €199 per jaar (17% korting)</p>
+        </div>
+        <div class="p-6 flex-grow">
+          <img src={electrical} alt="Elektricien" class="w-full h-48 object-cover rounded-xl mb-6" />
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>5 spoedbezoeken per jaar</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Hoogste prioriteit bij noodgevallen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>10% korting op materialen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>24/7 telefonische ondersteuning</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Jaarlijkse veiligheidsinspectie</span>
+            </li>
+          </ul>
+        </div>
+        <div class="p-6 border-t border-gray-200">
+          <a href="/contact" class="w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl transition duration-300">
+            Kies Premium
+          </a>
+        </div>
+      </div>
+      
+      <!-- Pro Plan -->
+      <div class="border border-gray-200 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg group">
+        <div class="bg-blue-50 p-6 text-center border-b border-gray-200">
+          <h3 class="text-2xl font-bold">Zakelijk</h3>
+          <div class="mt-4 flex justify-center">
+            <span class="text-4xl font-bold">€29,95</span>
+            <span class="text-gray-500 self-end mb-1 ml-1">/maand</span>
+          </div>
+          <p class="mt-2 text-gray-600 text-sm">of €299 per jaar (17% korting)</p>
+        </div>
+        <div class="p-6 flex-grow">
+          <img src={locksmith} alt="Slotenmaker" class="w-full h-48 object-cover rounded-xl mb-6" />
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>10 spoedbezoeken per jaar</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Hoogste prioriteit bij noodgevallen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>15% korting op materialen</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>24/7 telefonische ondersteuning</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Halfjaarlijkse veiligheidsinspectie</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Toegewezen persoonlijke monteur</span>
+            </li>
+          </ul>
+        </div>
+        <div class="p-6 border-t border-gray-200">
+          <a href="/contact" class="w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl transition duration-300">
+            Kies Zakelijk
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-12 text-center">
+      <p class="mb-4 text-gray-600">Twijfelt u welk abonnement bij u past?</p>
+      <a href="tel:+31612345678" class="inline-flex items-center gap-2 bg-yellow-300 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-xl transition duration-300">
+        <svg class="text-black w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="currentColor" d="m15.1 15.027l.545.517zm.456-.48l-.544-.516zm2.417-.335l-.374.65zm1.91 1.1l-.374.65zm.539 3.446l.543.517zm-1.42 1.496l-.545-.517zm-1.326.71l.074.745zm-9.86-4.489l.543-.516zm-4.064-9.55a.75.75 0 1 0-1.498.081zm5.439 1.88l.544.517zm.287-.302l.543.517zm.156-2.81l.613-.433zM8.374 3.91l-.613.433zm-3.656-.818a.75.75 0 0 0 1.087 1.033zm6.345 9.964l.544-.517zm-.399 6.756a.75.75 0 1 0 .798-1.27zm4.449.246a.75.75 0 0 0-.307 1.469zm.532-4.514l.455-.48l-1.088-1.033l-.455.48zm1.954-.682l1.91 1.1l.749-1.3l-1.911-1.1zm2.279 3.38l-1.42 1.495l1.087 1.034l1.42-1.496zM8.359 15.959c-3.876-4.081-4.526-7.523-4.607-9.033l-1.498.08c.1 1.85.884 5.634 5.018 9.986zm1.376-6.637l.286-.302l-1.087-1.033l-.287.302zm.512-4.062L8.986 3.477l-1.225.866l1.26 1.783zM9.19 8.805a38 38 0 0 0-.545-.515l-.002.002l-.003.003l-.05.058a1.6 1.6 0 0 0-.23.427c-.098.275-.15.639-.084 1.093c.13.892.715 2.091 2.242 3.7l1.088-1.034c-1.428-1.503-1.78-2.428-1.846-2.884c-.032-.22 0-.335.013-.372l.008-.019l-.028.037l-.018.02zm1.328 4.767c1.523 1.604 2.673 2.234 3.55 2.377c.451.073.816.014 1.092-.095a1.5 1.5 0 0 0 .422-.25l.035-.034l.014-.014l.007-.006l.003-.003l.001-.002s.002-.001-.542-.518c-.544-.516-.543-.517-.543-.518l.002-.001l.002-.003l.006-.005l.047-.042q.014-.008-.005.001c-.02.008-.11.04-.3.009c-.402-.066-1.27-.42-2.703-1.929zM8.986 3.477C7.972 2.043 5.944 1.8 4.718 3.092l1.087 1.033c.523-.55 1.444-.507 1.956.218zm9.471 16.26c-.279.294-.57.452-.854.48l.147 1.492c.747-.073 1.352-.472 1.795-.939zM10.021 9.02c.968-1.019 1.036-2.613.226-3.76l-1.225.866c.422.597.357 1.392-.088 1.86zm9.488 6.942c.821.473.982 1.635.369 2.28l1.087 1.033c1.305-1.374.925-3.673-.707-4.613zm-3.409-.898c.385-.406.986-.497 1.499-.202l.748-1.3c-1.099-.632-2.46-.45-3.335.47zm-4.638 3.478c-.983-.618-2.03-1.454-3.103-2.583l-1.087 1.033c1.154 1.215 2.297 2.132 3.392 2.82zm6.14 1.675a8.3 8.3 0 0 1-2.489-.159l-.307 1.469a9.8 9.8 0 0 0 2.944.182z" />
+        </svg>
+        Bel voor Advies: +31 6 1234 5678
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Veelgestelde Vragen</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        Antwoorden op de meest gestelde vragen over onze abonnementen.
+      </p>
+    </div>
+    
+    <div class="max-w-3xl mx-auto">
+      {#each faqs as faq, index}
+        <div class="bg-white rounded-xl mb-4 overflow-hidden border border-gray-200">
+          <button 
+            class="w-full text-left p-5 flex justify-between items-center focus:outline-none"
+            on:click={() => toggleFaq(index)}
+          >
+            <span class="font-medium">{faq.question}</span>
+            <svg 
+              class="w-5 h-5 transition-transform duration-300 {openFaq === index ? 'transform rotate-180' : ''}" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          
+          {#if openFaq === index}
+            <div class="px-5 pb-5">
+              <p class="text-gray-600 font-light">{faq.answer}</p>
+            </div>
+          {/if}
+        </div>
+      {/each}
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-white py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto bg-blue-500 rounded-3xl overflow-hidden">
+      <div class="p-8 md:p-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Klaar om Zorgeloos te Leven?</h2>
+        <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+          Word vandaag nog abonnee en geniet van de gemoedsrust dat er altijd een professional klaarstaat om u te helpen bij calamiteiten.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#abonnementen" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-8 rounded-xl transition duration-300">
+            Bekijk Abonnementen
+          </a>
+          <a href="tel:+31612345678" class="bg-yellow-300 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-xl transition duration-300 inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            Bel Direct
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Add custom spinning animation if needed */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
