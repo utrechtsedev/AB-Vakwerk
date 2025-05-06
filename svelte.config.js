@@ -21,13 +21,15 @@ const config = {
   kit: {
     adapter: adapter()
   },
+  
+  // Only apply mdsvex to .md files, not to .svelte files
+  extensions: ['.svelte'],
+  
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      extensions: ['.md', '.svx']
-      // No layout specified - we'll use SvelteKit's default layout behavior
+      extensions: ['.md', '.svx'] // Ensure this only targets Markdown files
     })
-  ],
-  extensions: ['.svelte', '.md', '.svx'],
+  ]
 };
 export default config;
