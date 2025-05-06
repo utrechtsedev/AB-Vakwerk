@@ -208,5 +208,4 @@
 <AboutUs />
 <Services />
 <Reviews />
-<Footer />
 

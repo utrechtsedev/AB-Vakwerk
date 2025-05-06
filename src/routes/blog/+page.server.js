@@ -1,3 +1,4 @@
+export const ssr = true; 
 export async function load() {
   const postsModules = import.meta.glob('./*/+page.md');
   
