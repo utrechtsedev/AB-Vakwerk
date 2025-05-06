@@ -2,6 +2,14 @@ import adapter from '@sveltejs/adapter-node';
 import { mdsvex } from 'mdsvex';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+// Create a separate mdsvex preprocessor
+const mdsvexPreprocessor = mdsvex({
+  extensions: ['.md', '.svx'],
+  layout: {
+    _: './src/lib/layouts/post.svelte' // Put your layout file here
+  }
+});
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   compilerOptions: {
@@ -18,23 +26,21 @@ const config = {
       return !ignore.includes(warning.code)
     },
   },
-  kit: {
-    adapter: adapter()
-  },
   
-  // This is crucial - need to include both file types
+  // Define which preprocessors apply to which file extensions
   extensions: ['.svelte', '.md', '.svx'],
   
-  preprocess: [
-    vitePreprocess(),
-    mdsvex({
-      extensions: ['.md', '.svx'],
-      // Add this to help with syntax highlighting in code blocks
-      highlight: {
-        alias: { js: 'javascript' }
-      }
-    })
-  ]
+  preprocess: {
+    // Only apply vitePreprocess to .svelte files
+    '.svelte': [vitePreprocess()],
+    // Only apply mdsvex to .md and .svx files
+    '.md': [mdsvexPreprocessor],
+    '.svx': [mdsvexPreprocessor]
+  },
+  
+  kit: {
+    adapter: adapter()
+  }
 };
 
 export default config;
