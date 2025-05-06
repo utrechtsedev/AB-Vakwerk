@@ -2,15 +2,16 @@
 import { json } from '@sveltejs/kit';
 import nodemailer from 'nodemailer';
 
+
 // Configure nodemailer transporter
 // For production, you should use real SMTP credentials
 const transporter = nodemailer.createTransport({
-  host: 'smtp.example.com', // Replace with your SMTP server
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: process.env.SMTP_SECURE === 'true',
   auth: {
-    user: 'your-email@example.com', // Replace with your email
-    pass: 'your-password' // Replace with your password or app-specific password
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   }
 });
 
@@ -68,7 +69,7 @@ export async function POST({ request }) {
     // Email content
     const mailOptions = {
       from: '"AB Vakwerk Website" <noreply@ab-vakwerk.nl>',
-      to: 'contact@ab-vakwerk.nl', // Replace with recipient email address
+      to: 'contact@ab-vakwerk.nl', 
       replyTo: email,
       subject: emailSubject,
       text: `
