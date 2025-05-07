@@ -10,7 +10,7 @@ export const GET = async () => {
       '/blog/category/[category]/page/[page]',
       '/blog/category/page/[page]',
       '/blog/page/[page]'
-      '/api'
+      '/api/posts/page/[page]'
     ],
   });
 };
