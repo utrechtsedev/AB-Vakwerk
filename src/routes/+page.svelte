@@ -11,7 +11,7 @@
 <svelte:head>
   <!-- Primary Meta Tags -->
   <title
-    >SpoedSpecialist - 24/7 Spoed Loodgieter, Elektricien & Slotenmaker</title
+    >A&B Vakwerk</title
   >
   <meta
     name="title"
