@@ -1,24 +1,9 @@
-export const ssr = true; 
-export async function load() {
-  const postsModules = import.meta.glob('./*/+page.md');
-  
-  const posts = [];
-  
-  for (const path in postsModules) {
-    const module = await postsModules[path]();
-    const slug = path.split('/')[1];
-    
-    posts.push({
-      slug,
-      title: module.metadata.title,
-      date: module.metadata.date
-    });
-  }
-  
-  // Sort posts by date (newest first)
-  posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-  
-  return {
-    posts
-  };
+export const load = async ({ url, fetch }) => {
+	const postRes = await fetch(`${url.origin}/api/posts.json`)
+	const posts = await postRes.json()
+
+	const totalRes = await fetch(`${url.origin}/api/posts/count`)
+	const total = await totalRes.json()
+
+	return { posts, total }
 }

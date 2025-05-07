@@ -1,46 +1,54 @@
-<div class="blog-container">
-  <slot />
-</div>
+<script>
+	import { run } from 'svelte/legacy';
+	import { currentPage, isMenuOpen } from '$lib/assets/js/store.js';
+	import { navItems } from '$lib/config';
+	import { preloadCode } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import { siteTitle, siteURL } from '$lib/config.js';
+	let { data, children } = $props();
 
-<style>
-  .blog-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+	const transitionIn = { delay: 150, duration: 150 };
+	const transitionOut = { duration: 100 };
 
-  /* Target MDsveX-processed content with more specific selectors */
-  :global(.blog-container > :is(h1, h2, h3, h4, h5, h6)) {
-    font-size: revert;
-    font-weight: revert;
-    margin: revert;
-  }
+	/**
+	 * Updates the global store with the current path. (Used for highlighting
+	 * the current page in the nav, but could be useful for other purposes.)
+	 **/
+	run(() => {
+		currentPage.set(data.path);
+	});
 
-  /* Basic styles for common Markdown elements */
-  :global(.blog-container > h1) {
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
+	/**
+	 * This pre-fetches all top-level routes on the site in the background for faster loading.
+	 * https://kit.svelte.dev/docs/modules#$app-navigation-preloaddata
+	 *
+	 * Any route added in src/lib/config.js will be preloaded automatically. You can add your
+	 * own preloadData() calls here, too.
+	 **/
+	onMount(() => {
+		const navRoutes = navItems.map((item) => item.route);
+		preloadCode(...navRoutes);
+	});
+</script>
 
-  :global(.blog-container > h2) {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  :global(.blog-container > p) {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-
-  /* Other styles from your list, but with :global() */
-  :global(.blog-container > a) {
-    color: #3182ce;
-    text-decoration: underline;
-  }
-  
-  /* Continue with other elements as needed */
-</style>
+<svelte:head>
+	<link rel="stylesheet" href="/css/vars.css" />
+	<link rel="stylesheet" href="/css/root.css" />
+	<link rel="stylesheet" href="/css/fonts.css" />
+	<link rel="stylesheet" href="/css/typography.css" />
+	<link rel="stylesheet" href="/css/layout.css" />
+	<link rel="stylesheet" href="/css/components.css" />
+	<link rel="stylesheet" href="/css/forms.css" />
+	<link rel="stylesheet" href="/css/animation.css" />
+	<link rel="stylesheet" href="/css/utilities.css" />
+	<link rel="stylesheet" href="/css/code.css" />
+	<link rel="stylesheet" href="/css/prism.css" />
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title={siteTitle}
+		href="http://{siteURL}/api/rss.xml"
+	/>
+</svelte:head>
+<slot />

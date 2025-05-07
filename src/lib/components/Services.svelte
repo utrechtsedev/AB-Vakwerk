@@ -34,7 +34,7 @@
         >
           <div>
             <h3 class="text-2xl font-bold text-gray-800 mt-2 mb-4 md:mb-8">
-              Loodgieter
+              Tegelen
             </h3>
             <p class="text-gray-600 font-light">
               Onze loodgieters zijn 24/7 beschikbaar voor alle
@@ -89,7 +89,7 @@
         >
           <div>
             <h3 class="text-2xl font-bold text-gray-800 mt-2 mb-4 md:mb-8">
-              Elektricien
+              Afbouw
             </h3>
             <p class="text-gray-600 font-light">
               Onze gekwalificeerde elektriciens kunnen u helpen met alle
@@ -144,7 +144,7 @@
         >
           <div>
             <h3 class="text-2xl font-bold text-gray-800 mt-2 mb-4 md:mb-8">
-              Slotenmaker
+              Stucen
             </h3>
             <p class="text-gray-600 font-light">
               Buitengesloten of uw sloten vervangen? Onze slotenmakers zijn
