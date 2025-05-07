@@ -9,8 +9,8 @@ export const GET = async () => {
       '/blog/category/[category]',
       '/blog/category/[category]/page/[page]',
       '/blog/category/page/[page]',
-      '/blog/page/[page]'
-      '/api/posts/page/[page]'
+      '/blog/page/[page]',
+      '/api'
     ],
   });
 };
